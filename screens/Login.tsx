@@ -1,3 +1,4 @@
+import React from 'react';
 import { Keyboard, StyleSheet, TouchableWithoutFeedback, Image } from 'react-native';
 import { useState } from 'react';
 
