@@ -1,9 +1,5 @@
-<<<<<<< HEAD
+import React from "react";
 import { StyleSheet } from "react-native";
-=======
-import React from 'react';
-import { StyleSheet } from 'react-native';
->>>>>>> 9d8232a472a1f786e3e55c679ebeb8d69d53d0c1
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
