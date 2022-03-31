@@ -129,3 +129,4 @@ ios
 
 # Environment
 .env
+node_modules
