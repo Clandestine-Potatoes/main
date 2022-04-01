@@ -9,7 +9,7 @@ import { TextInput } from 'react-native-paper';
 import { useForm, Controller } from "react-hook-form";
 
 
-export default function AccountCreation() {
+export default function AccountCreation({ navigation: { navigate }}: { navigation: { navigate: any}}) {
   const { control, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       email: '',
@@ -36,7 +36,7 @@ export default function AccountCreation() {
           name='password'
           />
           {errors.password && <Text style={styles.warning}>Password is required.</Text>}
-          <Button style={styles.createAccountButton} title="Submit" onPress={handleSubmit(onSubmit)}/>
+          <Button style={styles.createAccountButton} title="Submit" onPress={() => navigate('AboutMeEdit')} />
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAwareScrollView>
@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 45,
+    marginTop: -100
   },
   input: {
     marginTop: 15

@@ -13,7 +13,7 @@ import { Button, Flex, Pressable } from "@react-native-material/core";
 import { TextInput } from "react-native-paper";
 import useSignIn from "../api/firebase/hooks/useSignIn";
 
-export default function Login() {
+export default function Login({ navigation: { navigate }}: { navigation: { navigate: any}}) {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -60,7 +60,7 @@ export default function Login() {
         />
         <Flex style={styles.signUpContainer}>
           <Text>Don't have an account?</Text>
-          <Pressable>
+          <Pressable onPress={() => navigate('AccountCreation')}>
             <Text style={styles.signUpLink}> Sign up here.</Text>
           </Pressable>
         </Flex>
@@ -72,8 +72,9 @@ export default function Login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
     padding: 45,
+    marginTop: -100
   },
   logo: {
     width: 100,
