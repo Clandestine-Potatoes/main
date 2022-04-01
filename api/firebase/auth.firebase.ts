@@ -9,17 +9,11 @@ import firebase from "./firebase";
 
 const auth = getAuth(firebase);
 
-export async function signup(email: string, password: string) {
-  createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in
-      const user = userCredential.user;
-      // ...
-    })
+export function signUp(email: string, password: string): Promise<User> {
+  return createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => userCredential.user)
     .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
+      throw new Error(error);
     });
 }
 

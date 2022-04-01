@@ -1,6 +1,10 @@
+import { User } from "firebase/auth";
 import {
+  addDoc,
+  collection,
   doc,
   DocumentData,
+  DocumentReference,
   getFirestore,
   QueryDocumentSnapshot,
   setDoc,
@@ -22,9 +26,23 @@ function fsTypeConverter<D>(doc: D) {
 }
 
 // DAO
-export function addDoc<T>(path: string, data: T): Promise<void> {
+export function createDocCustomId<T>(
+  path: string,
+  data: T,
+  id: string
+): Promise<void> {
+  return setDoc(doc(db, path, id), data).catch((err) => {
+    throw new Error(err);
+  });
+}
+
+export function createDocAutoId<T>(path: string, data: T) {
   const converter = fsTypeConverter<T>(data);
-  return setDoc(doc(db, path).withConverter(converter), data);
+  return addDoc(collection(db, path).withConverter(converter), data).catch(
+    (err) => {
+      throw new Error(err);
+    }
+  );
 }
 
 export function updateDoc() {}
@@ -36,6 +54,11 @@ export function getDocs() {}
 export function deleteDoc() {}
 
 // Services
+export function createNewUserDoc(user: User) {
+  const { uid, email } = user;
+  return createDocCustomId<{ email: string | null }>("users", { email }, uid);
+}
+
 export type AboutData = {
   name: string;
   email: string;
@@ -44,6 +67,10 @@ export type AboutData = {
   bio: string;
 };
 
-export function setUserAbout(aboutData: AboutData): Promise<void> {
-  return addDoc<AboutData>("users", aboutData);
-}
+// export function setUserAbout(aboutData: AboutData): Promise<void> {
+//   return addDoc<AboutData>("users", aboutData);
+// }
+
+// export function setUserInterests(interestData: Array<string>) {
+//   return addDoc;
+// }
