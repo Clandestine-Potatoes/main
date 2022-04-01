@@ -4,7 +4,6 @@ import type { User as AuthUser } from "firebase/auth";
 import { useEffect } from "react";
 import { useState } from "react";
 import AuthContext from "./AuthContext";
-import firebase from "../../api/firebase/firebase";
 import { auth } from "../../api/firebase/auth.firebase";
 import { getUser } from "../../api/firebase/firestore.firebase";
 import {
@@ -20,7 +19,7 @@ class AppUser implements IAppUser {
   email: string;
   about: IAbout | undefined;
   interests: TInterests | undefined;
-  location: IGeoPoint | undefined;
+  location: string | undefined;
 
   constructor(authUser: AuthUser) {
     this.uid = authUser.uid;
