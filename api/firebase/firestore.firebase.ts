@@ -1,6 +1,7 @@
 import { User } from "firebase/auth";
 import {
   addDoc,
+  updateDoc as fsUpdate,
   collection,
   doc,
   DocumentData,
@@ -45,7 +46,11 @@ export function createDocAutoId<T>(path: string, data: T) {
   );
 }
 
-export function updateDoc() {}
+export function updateDoc<T>(path: string, data: T, id: string): Promise<void> {
+  return fsUpdate(doc(db, path, id), data).catch((err) => {
+    throw new Error(err);
+  });
+}
 
 export function getDoc() {}
 
@@ -59,13 +64,10 @@ export function createNewUserDoc(user: User) {
   return createDocCustomId<{ email: string | null }>("users", { email }, uid);
 }
 
-export type AboutData = {
-  name: string;
-  email: string;
-  birthday: Date;
-  identify: "male" | "female" | "non-binary";
-  bio: string;
-};
+export function updateUserAbout(user: User, data: Partial<AboutData>) {
+  const { uid } = user;
+  return updateDoc<Partial<AboutData>>("user", data, uid);
+}
 
 // export function setUserAbout(aboutData: AboutData): Promise<void> {
 //   return addDoc<AboutData>("users", aboutData);
@@ -74,3 +76,12 @@ export type AboutData = {
 // export function setUserInterests(interestData: Array<string>) {
 //   return addDoc;
 // }
+
+// Types
+export type AboutData = {
+  name: string;
+  email: string;
+  birthday: Date;
+  identify: "male" | "female" | "non-binary";
+  bio: string;
+};

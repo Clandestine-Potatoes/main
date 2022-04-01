@@ -1,5 +1,4 @@
 import { useState } from "react";
-import type { User } from "firebase/auth";
 import { signUp } from "../auth.firebase";
 import { createNewUserDoc } from "../firestore.firebase";
 import useAuth from "../../../contexts/auth-context/useAuth";
