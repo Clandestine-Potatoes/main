@@ -3,7 +3,10 @@ import { useState } from "react";
 import useAuth from "../../../contexts/auth-context/useAuth";
 import { signIn } from "../auth.firebase";
 
-export default function useSignIn() {
+export default function useSignIn(): [
+  (email: string, password: string) => void,
+  { isSuccess: boolean; isLoading: boolean; error: any }
+] {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isSuccess, setIsSuccess] = useState(false);
