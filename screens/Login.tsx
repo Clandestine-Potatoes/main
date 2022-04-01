@@ -15,7 +15,7 @@ export default function Login() {
       <View style={styles.container}>
         <Image style={styles.logo} source={require('./../assets/images/potato.png')} />
         <TextInput activeOutlineColor='#0089E3' label="Email" mode='outlined' style={styles.input} autoComplete/>
-        <TextInput activeOutlineColor='#0089E3' label="Password" mode='outlined' style={styles.input} autoComplete onChangeText={(value) => setPassword(() => value)}/>
+        <TextInput activeOutlineColor='#0089E3' label="Password" mode='outlined' style={styles.input} autoComplete onChangeText={(value) => setPassword(() => value)} secureTextEntry />
         <Pressable style={styles.forgotPasswordContainer}>
           <Text style={styles.forgotPasswordLink}>Forgot password?</Text>
         </Pressable>
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   input: {
-    marginTop: 20
+    marginTop: 15
   },
   signUpContainer: {
     flexDirection: 'row',
