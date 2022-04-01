@@ -7,7 +7,12 @@ import AuthContext from "./AuthContext";
 import firebase from "../../api/firebase/firebase";
 import { auth } from "../../api/firebase/auth.firebase";
 import { getUser } from "../../api/firebase/firestore.firebase";
-import { IAbout, IAppUser, TInterests } from "../../api/firebase/types";
+import {
+  IAbout,
+  IAppUser,
+  IGeoPoint,
+  TInterests,
+} from "../../api/firebase/types";
 import App from "../../App";
 
 class AppUser implements IAppUser {
@@ -15,6 +20,7 @@ class AppUser implements IAppUser {
   email: string;
   about: IAbout | undefined;
   interests: TInterests | undefined;
+  location: IGeoPoint | undefined;
 
   constructor(authUser: AuthUser) {
     this.uid = authUser.uid;
@@ -26,6 +32,7 @@ class AppUser implements IAppUser {
     const data = getUser(this.uid).then((data) => {
       this.about = data?.about;
       this.interests = data?.interests;
+      this.location = data?.location;
     });
   }
 }

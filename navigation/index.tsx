@@ -18,6 +18,8 @@ import Dashboard from '../screens/Dashboard';
 import Inbox from '../screens/Inbox';
 import Settings from '../screens/Settings';
 import Login from '../screens/Login';
+import AccountCreation from '../screens/AccountCreation';
+import AboutMeEdit from '../screens/AboutMeEdit';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 

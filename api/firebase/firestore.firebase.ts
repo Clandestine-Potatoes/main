@@ -1,4 +1,3 @@
-import { User } from "firebase/auth";
 import {
   addDoc,
   updateDoc as fsUpdate,
@@ -9,9 +8,10 @@ import {
   QueryDocumentSnapshot,
   setDoc,
   getDoc,
+  GeoPoint,
 } from "firebase/firestore";
 import firebase from "./firebase";
-import type { IAbout, IAppUser, TInterests } from "./types";
+import type { IAbout, IAppUser, TInterests, IGeoLocation } from "./types";
 
 const db = getFirestore(firebase);
 
@@ -93,3 +93,20 @@ export function getUser(uid: string) {
   // TODO: This should be of type AppUser
   return getDocById<IAppUser>(COLLECTIONS.USERS, uid);
 }
+export function updateLocation(uid: string, location: IGeoLocation) {
+  const loc = new GeoPoint(location.latitude, location.longitude);
+  return updateDoc<GeoPoint>(COLLECTIONS.USERS, loc, uid);
+}
+
+// Types
+export type AboutData = {
+  name: string;
+  email: string;
+  birthday: Date;
+  identify: "male" | "female" | "non-binary";
+  bio: string;
+};
+
+export type InterestData = {
+  interests: Array<string>;
+};

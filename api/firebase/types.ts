@@ -1,3 +1,6 @@
+import { GeoPoint as IGeoPoint } from "firebase/firestore";
+
+export { GeoPoint as IGeoPoint } from "firebase/firestore";
 export { User as IAuthUser } from "firebase/auth";
 
 export interface IAppUser {
@@ -5,6 +8,7 @@ export interface IAppUser {
   email: string;
   about: IAbout | undefined;
   interests: TInterests | undefined;
+  location: IGeoPoint | undefined;
 }
 
 export interface IAbout {
@@ -15,3 +19,8 @@ export interface IAbout {
 }
 
 export type TInterests = Array<string>;
+
+export interface IGeoLocation {
+  latitude: number;
+  longitude: number;
+}
