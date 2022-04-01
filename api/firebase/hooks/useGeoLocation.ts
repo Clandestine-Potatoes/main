@@ -8,6 +8,7 @@ export default function useGeoLocation() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isSuccess, setIsSucess] = useState(false);
+  const [location, setLocation] = useState(null);
 
   const { appUser } = useAuth();
 
@@ -27,6 +28,7 @@ export default function useGeoLocation() {
           )
           .then((result) => {
             const city = result.data.results[0].address_components[0].long_name;
+            setLocation(city);
             updateLocation(appUser.uid, city).then(() => {
               setIsSucess(true);
             });
@@ -42,5 +44,5 @@ export default function useGeoLocation() {
       .finally(() => setIsLoading(false));
   }
 
-  return [trigger, { isSuccess, isLoading, error }];
+  return [trigger, { location, isSuccess, isLoading, error }];
 }
