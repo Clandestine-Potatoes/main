@@ -16,7 +16,7 @@ import {
 } from "firebase/firestore";
 import { string } from "yup";
 import firebase from "./firebase";
-import type { IAbout, IAppUser, TInterests, IGeoCode } from "./types";
+import type { IAbout, IAppUser, TInterests, TGeoCode } from "./types";
 
 const db = getFirestore(firebase);
 
@@ -118,8 +118,8 @@ export function getUser(uid: string) {
   // TODO: This should be of type AppUser
   return getDocById<IAppUser>(COLLECTIONS.USERS, uid);
 }
-export function updateLocation(uid: string, location: IGeoCode) {
-  return updateDoc<IGeoCode>(COLLECTIONS.USERS, location, uid);
+export function updateLocation(uid: string, location: TGeoCode) {
+  return updateDoc<TGeoCode>(COLLECTIONS.USERS, location, uid);
 }
 
 export function getUsersByLocation(location: string) {

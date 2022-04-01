@@ -17,6 +17,4 @@ export interface IAbout {
 
 export type TInterests = Array<string>;
 
-export interface IGeoCode {
-  string: number;
-}
+export type TGeoCode = string;

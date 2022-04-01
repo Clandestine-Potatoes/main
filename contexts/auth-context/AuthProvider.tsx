@@ -54,8 +54,16 @@ const AuthProvider: FC = ({ children }) => {
     setAppUser(null);
   }
 
+  function updateUserLocation(location: string) {
+    if (!appUser) return;
+    appUser.location = location;
+    setAppUser(appUser);
+  }
+
   return (
-    <AuthContext.Provider value={{ appUser, setUser, removeUser }}>
+    <AuthContext.Provider
+      value={{ appUser, setUser, removeUser, updateUserLocation }}
+    >
       {children}
     </AuthContext.Provider>
   );

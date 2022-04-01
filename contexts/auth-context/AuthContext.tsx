@@ -6,5 +6,6 @@ export type TAuthContext = {
   appUser: IAppUser | null;
   setUser: (user: IAuthUser) => void;
   removeUser: () => void;
+  updateUserLocation: (location: string) => void;
 };
 export default React.createContext<TAuthContext | undefined>(undefined);
