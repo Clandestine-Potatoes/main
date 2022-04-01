@@ -9,10 +9,18 @@ import {
   getFirestore,
   QueryDocumentSnapshot,
   setDoc,
+  GeoPoint,
 } from "firebase/firestore";
 import firebase from "./firebase";
 
 const db = getFirestore(firebase);
+const COLLECTIONS = {
+  USERS: "users",
+};
+interface GeoLocation {
+  latitude: number;
+  longitude: number;
+}
 
 // TS comverter
 function fsTypeConverter<D>(doc: D) {
@@ -72,6 +80,11 @@ export function updateUserAbout(user: User, data: Partial<AboutData>) {
 export function updateUserInterests(user: User, data: InterestData) {
   const { uid } = user;
   return updateDoc<InterestData>("user", data, uid);
+}
+
+export function updateLocation(uid: string, location: GeoLocation) {
+  const loc = new GeoPoint(location.latitude, location.longitude);
+  return updateDoc<GeoPoint>(COLLECTIONS.USERS, loc, uid);
 }
 
 // Types
