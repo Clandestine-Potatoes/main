@@ -51,8 +51,9 @@ const AuthProvider: FC = ({ children }) => {
 
   useEffect(() => {
     // Location for appUser is updated in DB in useGeoLocation hook
+    if (!appUser) return;
     if (!location) {
-      trigger();
+      trigger(appUser.uid);
     }
 
     if (location) {

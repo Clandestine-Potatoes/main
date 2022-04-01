@@ -1,11 +1,11 @@
 import { useState } from "react";
-import useAuth from "../../../contexts/auth-context/useAuth";
+// import useAuth from "../../../contexts/auth-context/useAuth";
 import { updateLocation } from "../firestore.firebase";
 import axios from "axios";
 import config from "../../config";
 
 export default function useGeoLocation(): [
-  () => void,
+  (uid: string) => void,
   {
     location: string | null;
     isSuccess: boolean;
@@ -18,12 +18,12 @@ export default function useGeoLocation(): [
   const [isSuccess, setIsSucess] = useState(false);
   const [location, setLocation] = useState(null);
 
-  const { appUser } = useAuth();
+  // const { appUser } = useAuth();
 
-  function trigger() {
-    if (!appUser) {
-      return;
-    }
+  function trigger(uid: string) {
+    // if (!appUser) {
+    //   return;
+    // }
     setIsLoading(true);
     axios
       .post(
@@ -37,7 +37,7 @@ export default function useGeoLocation(): [
           .then((result) => {
             const city = result.data.results[0].address_components[0].long_name;
             setLocation(city);
-            updateLocation(appUser.uid, city).then(() => {
+            updateLocation(uid, city).then(() => {
               setIsSucess(true);
             });
           });
