@@ -24,11 +24,13 @@ import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../typ
 import LinkingConfiguration from './LinkingConfiguration';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
+  const authenticatedUser = null;
+
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <RootNavigator />
+      {authenticatedUser ? <AuthenticatedNavigator /> : <UnauthenticatedNavigator />}
     </NavigationContainer>
   );
 }
@@ -39,15 +41,22 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
  */
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-function RootNavigator() {
+function UnauthenticatedNavigator() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name='Login' component={Login}/>
+      <Stack.Screen name='AccountCreation' component={AccountCreation}/>
+      <Stack.Screen name='AboutMeEdit' component={AboutMeEdit}/>
+    </Stack.Navigator>
+  )
+}
+
+function AuthenticatedNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Screen name="Settings" component={Settings}/>
-      {/* <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group> */}
     </Stack.Navigator>
   );
 }
@@ -69,7 +78,7 @@ function BottomTabNavigator() {
       }}>
       <BottomTab.Screen
         name="Dashboard"
-        component={Login}
+        component={Dashboard}
         options={({ navigation }: RootTabScreenProps<'Dashboard'>) => ({
           title: 'Dashboard',
           tabBarIcon: ({ color }) => <TabBarIcon name="users" color={color} />,
