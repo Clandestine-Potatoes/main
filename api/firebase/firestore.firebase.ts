@@ -96,16 +96,3 @@ export function getUser(uid: string) {
 export function updateLocation(uid: string, location: IGeoCode) {
   return updateDoc<IGeoCode>(COLLECTIONS.USERS, location, uid);
 }
-
-// Types
-export type AboutData = {
-  name: string;
-  email: string;
-  birthday: Date;
-  identify: "male" | "female" | "non-binary";
-  bio: string;
-};
-
-export type InterestData = {
-  interests: Array<string>;
-};
