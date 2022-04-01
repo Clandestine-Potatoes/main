@@ -7,7 +7,7 @@ import {
 import type { User } from "firebase/auth";
 import firebase from "./firebase";
 
-const auth = getAuth(firebase);
+export const auth = getAuth(firebase);
 
 export function signUp(email: string, password: string): Promise<User> {
   return createUserWithEmailAndPassword(auth, email, password)
