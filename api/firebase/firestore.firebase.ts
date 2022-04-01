@@ -39,6 +39,7 @@ export function createDocCustomId<T>(
   id: string
 ): Promise<void> {
   return setDoc(doc(db, path, id), data).catch((err) => {
+    console.log("err: ", err)
     throw new Error(err);
   });
 }
