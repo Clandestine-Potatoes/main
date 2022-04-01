@@ -38,7 +38,6 @@ export default function Settings({ navigation: { navigate }}: { navigation: { na
         <Text style={styles.sectionRow}>Age</Text>
       </Flex>
       <Button style={styles.logoutButton} title="Logout" onPress={handleLogout} />
-      {/* <EditScreenInfo path="/screens/Settings.tsx" /> */}
     </ScrollView>
   );
 }
@@ -48,13 +47,9 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 25,
     backgroundColor: '#F2F1F7',
-    // alignItems: 'center',
-    // justifyContent: 'center',
   },
   section: {
     backgroundColor: 'white',
-    // borderWidth: 2,
-    // borderColor: 'black'
     borderRadius: 6,
     padding: 20,
     marginBottom: 20
@@ -64,25 +59,15 @@ const styles = StyleSheet.create({
     paddingBottom: 10
   },
   sectionRow: {
-    // borderWidth: 1,
-    // borderColor: 'pink'
     paddingTop: 10,
     paddingBottom: 10
   },
   top: {
     paddingTop: 15
   },
-  // title: {
-  //   fontSize: 20,
-  //   fontWeight: 'bold',
-  // },
-  // separator: {
-  //   marginVertical: 30,
-  //   height: 1,
-  //   width: '80%',
-  // },
   logoutButton: {
     marginTop: 15,
-    marginRight: 10
+    backgroundColor: 'red',
+    paddingVertical: 6
   },
 });
