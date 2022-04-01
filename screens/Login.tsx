@@ -7,7 +7,7 @@ import { Text, View } from '../components/Themed';
 import { Button, Flex, Pressable } from "@react-native-material/core";
 import { TextInput } from 'react-native-paper';
 
-export default function Login() {
+export default function Login({ navigation: { navigate }}: { navigation: { navigate: any}}) {
   const [password, setPassword] = useState<string>('');
 
   return (
@@ -22,7 +22,7 @@ export default function Login() {
         <Button title="Log In" color="#0089E3" titleStyle={styles.loginButtonText} pressableContainerStyle={styles.loginButton} disabled={!password.length}/>
         <Flex style={styles.signUpContainer}>
           <Text>Don't have an account?</Text>
-          <Pressable>
+          <Pressable onPress={() => navigate('AccountCreation')}>
             <Text style={styles.signUpLink}>{' '}Sign up here.</Text>
           </Pressable>
         </Flex>
