@@ -8,8 +8,13 @@ import {
   QueryDocumentSnapshot,
   setDoc,
   getDoc,
+  getDocs,
   GeoPoint,
+  query,
+  where,
+  QueryConstraint,
 } from "firebase/firestore";
+import { string } from "yup";
 import firebase from "./firebase";
 import type { IAbout, IAppUser, TInterests, IGeoCode } from "./types";
 
@@ -39,7 +44,7 @@ export function createDocCustomId<T>(
   id: string
 ): Promise<void> {
   return setDoc(doc(db, path, id), data).catch((err) => {
-    console.log("err: ", err)
+    console.log("err: ", err);
     throw new Error(err);
   });
 }
@@ -66,15 +71,34 @@ export function getDocById<T>(path: string, id: string) {
   );
 }
 
-export function getDocs() {}
+export function getDocsByField<T>(path: string, filter: QueryConstraint) {
+  const converter = fsTypeConverter<T>();
+  const colRef = collection(db, path);
+  const q = query(colRef, filter).withConverter(converter);
+  return getDocs(q);
+}
+
+/*
+
+const q = query(collection(db, "cities"), where("capital", "==", true));
+
+const querySnapshot = await getDocs(q);
+querySnapshot.forEach((doc) => {
+  // doc.data() is never undefined for query doc snapshots
+  console.log(doc.id, " => ", doc.data());
+});
+
+
+
+*/
 
 export function deleteDoc() {}
 
 // Services
 export function createNewUserDoc(uid: string, email: string) {
-  return createDocCustomId<{ email: string | null }>(
+  return createDocCustomId<{ uid: string; email: string }>(
     COLLECTIONS.USERS,
-    { email },
+    { uid, email },
     uid
   );
 }
@@ -96,4 +120,9 @@ export function getUser(uid: string) {
 }
 export function updateLocation(uid: string, location: IGeoCode) {
   return updateDoc<IGeoCode>(COLLECTIONS.USERS, location, uid);
+}
+
+export function getUsersByLocation(location: string) {
+  const filter = where("location", "==", location);
+  return getDocsByField<IAppUser>(COLLECTIONS.USERS, filter);
 }
