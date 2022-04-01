@@ -5,17 +5,23 @@ import {
   collection,
   doc,
   DocumentData,
-  DocumentReference,
   getFirestore,
   QueryDocumentSnapshot,
   setDoc,
+  getDoc,
 } from "firebase/firestore";
 import firebase from "./firebase";
+import type { IAbout, IAppUser, TInterests } from "./types";
 
 const db = getFirestore(firebase);
 
-// TS comverter
-function fsTypeConverter<D>(doc: D) {
+const COLLECTIONS = {
+  USERS: "users",
+  MATCHES: "matches",
+};
+
+// TS converter
+function fsTypeConverter<D>(doc?: D) {
   return {
     toFirestore(doc: D): DocumentData {
       return doc;
@@ -52,37 +58,38 @@ export function updateDoc<T>(path: string, data: T, id: string): Promise<void> {
   });
 }
 
-export function getDoc() {}
+export function getDocById<T>(path: string, id: string) {
+  const converter = fsTypeConverter<T>();
+  return getDoc(doc(db, path, id).withConverter(converter)).then((snap) =>
+    snap.exists() ? snap.data() : undefined
+  );
+}
 
 export function getDocs() {}
 
 export function deleteDoc() {}
 
 // Services
-export function createNewUserDoc(user: User) {
-  const { uid, email } = user;
-  return createDocCustomId<{ email: string | null }>("users", { email }, uid);
+export function createNewUserDoc(uid: string, email: string) {
+  return createDocCustomId<{ email: string | null }>(
+    COLLECTIONS.USERS,
+    { email },
+    uid
+  );
 }
 
-export function updateUserAbout(user: User, data: Partial<AboutData>) {
-  const { uid } = user;
-  return updateDoc<Partial<AboutData>>("user", data, uid);
+export function updateUserAbout(uid: string, data: Partial<IAbout>) {
+  return updateDoc<Partial<IAbout>>(COLLECTIONS.USERS, data, uid);
 }
 
-export function updateUserInterests(user: User, data: InterestData) {
-  const { uid } = user;
-  return updateDoc<InterestData>("user", data, uid);
+export function updateUserInterests(
+  uid: string,
+  data: { interests: TInterests }
+) {
+  return updateDoc<{ interests: TInterests }>(COLLECTIONS.USERS, data, uid);
 }
 
-// Types
-export type AboutData = {
-  name: string;
-  email: string;
-  birthday: Date;
-  identify: "male" | "female" | "non-binary";
-  bio: string;
-};
-
-export type InterestData = {
-  interests: Array<string>;
-};
+export function getUser(uid: string) {
+  // TODO: This should be of type AppUser
+  return getDocById<IAppUser>(COLLECTIONS.USERS, uid);
+}

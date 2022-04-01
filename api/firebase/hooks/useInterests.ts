@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { updateUserInterests } from "../firestore.firebase";
-import type { InterestData } from "../firestore.firebase";
 import useAuth from "../../../contexts/auth-context/useAuth";
 
 export default function useSignUp() {

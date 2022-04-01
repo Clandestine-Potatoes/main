@@ -1,21 +1,21 @@
 import { useState } from "react";
 import { updateUserAbout } from "../firestore.firebase";
-import type { AboutData } from "../firestore.firebase";
 import useAuth from "../../../contexts/auth-context/useAuth";
+import { IAbout } from "../types";
 
 export default function useSignUp() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const { user } = useAuth();
+  const { appUser } = useAuth();
 
-  function trigger(data: AboutData) {
-    if (!user) {
+  function trigger(data: IAbout) {
+    if (!appUser) {
       throw new Error("No authenticated user.");
     }
     setIsLoading(true);
-    updateUserAbout(user, data)
+    updateUserAbout(appUser.uid, data)
       .then(() => setIsSuccess(true))
       .catch((err) => setError(err))
       .finally(() => setIsLoading(false));
