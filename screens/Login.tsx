@@ -60,13 +60,8 @@ export default function Login() {
         />
         <Flex style={styles.signUpContainer}>
           <Text>Don't have an account?</Text>
-<<<<<<< HEAD
           <Pressable>
             <Text style={styles.signUpLink}> Sign up here.</Text>
-=======
-          <Pressable onPress={() => navigate('AccountCreation')}>
-            <Text style={styles.signUpLink}>{' '}Sign up here.</Text>
->>>>>>> 02186284d77d00f3f5a58b70fdfe5978a93f679a
           </Pressable>
         </Flex>
       </View>
