@@ -68,6 +68,6 @@ const styles = StyleSheet.create({
   logoutButton: {
     marginTop: 15,
     backgroundColor: 'red',
-    paddingVertical: 6
+    padding: 5
   },
 });

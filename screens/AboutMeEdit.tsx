@@ -80,11 +80,13 @@ const styles = StyleSheet.create({
   nextButton: {
     marginTop: 15,
     backgroundColor: '#0089E3',
-    marginRight: 10
+    marginRight: 10,
+    padding: 5
   },
   logoutButton: {
     marginTop: 15,
-    marginRight: 10
+    marginRight: 10,
+    padding: 5
   },
   aboutMeHeader: {
     fontWeight: '600',

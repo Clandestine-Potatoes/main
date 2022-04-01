@@ -74,7 +74,8 @@ const styles = StyleSheet.create({
   },
   createAccountButton: {
     marginTop: 15,
-    backgroundColor: '#0089E3'
+    backgroundColor: '#0089E3',
+    padding: 5
   },
   accountCreationHeader: {
     fontWeight: '600',
