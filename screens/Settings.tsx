@@ -7,7 +7,14 @@ import { RootTabScreenProps } from '../types';
 
 import { Button, Divider, Flex } from "@react-native-material/core";
 
-export default function Settings({ navigation }: RootTabScreenProps<'Settings'>) {
+import { signOut } from '../api/firebase/auth.firebase';
+
+export default function Settings({ navigation: { navigate }}: { navigation: { navigate: any}}) {
+  const handleLogout = () => {
+    signOut();
+    navigate('Login')
+  }
+
   return (
     <ScrollView style={styles.container}>
       <Flex style={styles.section}>
@@ -30,26 +37,7 @@ export default function Settings({ navigation }: RootTabScreenProps<'Settings'>)
         <Divider />
         <Text style={styles.sectionRow}>Age</Text>
       </Flex>
-      <Flex style={styles.section}>
-        <Text style={styles.sectionHeader}>Interested in</Text>
-        <Text style={[styles.sectionRow, styles.top]}>Name</Text>
-        <Divider />
-        <Text style={styles.sectionRow}>Email</Text>
-        <Divider />
-        <Text style={styles.sectionRow}>Phone</Text>
-        <Divider />
-        <Text style={styles.sectionRow}>Age</Text>
-      </Flex>
-      <Flex style={styles.section}>
-        <Text style={styles.sectionHeader}>Interested in</Text>
-        <Text style={[styles.sectionRow, styles.top]}>Name</Text>
-        <Divider />
-        <Text style={styles.sectionRow}>Email</Text>
-        <Divider />
-        <Text style={styles.sectionRow}>Phone</Text>
-        <Divider />
-        <Text style={styles.sectionRow}>Age</Text>
-      </Flex>
+      <Button style={styles.logoutButton} title="Logout" onPress={handleLogout} />
       {/* <EditScreenInfo path="/screens/Settings.tsx" /> */}
     </ScrollView>
   );
@@ -59,7 +47,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 25,
-    backgroundColor: '#F2F1F7'
+    backgroundColor: '#F2F1F7',
     // alignItems: 'center',
     // justifyContent: 'center',
   },
@@ -83,7 +71,7 @@ const styles = StyleSheet.create({
   },
   top: {
     paddingTop: 15
-  }
+  },
   // title: {
   //   fontSize: 20,
   //   fontWeight: 'bold',
@@ -93,4 +81,8 @@ const styles = StyleSheet.create({
   //   height: 1,
   //   width: '80%',
   // },
+  logoutButton: {
+    marginTop: 15,
+    marginRight: 10
+  },
 });

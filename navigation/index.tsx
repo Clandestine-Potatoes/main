@@ -61,6 +61,11 @@ function UnauthenticatedNavigator() {
       <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} />
       <Stack.Screen name='AccountCreation' component={AccountCreation} options={{ headerShown: false }} />
       <Stack.Screen name='AboutMeEdit' component={AboutMeEdit} options={{ headerShown: false }} />
+      <Stack.Screen
+        name="Root"
+        component={BottomTabNavigator}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }
@@ -68,12 +73,13 @@ function UnauthenticatedNavigator() {
 function AuthenticatedNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="AboutMeEdit" component={AboutMeEdit} />
       <Stack.Screen
         name="Root"
         component={BottomTabNavigator}
         options={{ headerShown: false }}
       />
+      <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} />
+      <Stack.Screen name="AboutMeEdit" component={AboutMeEdit} />
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}
