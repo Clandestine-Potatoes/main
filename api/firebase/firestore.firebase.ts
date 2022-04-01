@@ -98,16 +98,3 @@ export function updateLocation(uid: string, location: IGeoLocation) {
   const loc = new GeoPoint(location.latitude, location.longitude);
   return updateDoc<GeoPoint>(COLLECTIONS.USERS, loc, uid);
 }
-
-// Types
-export type AboutData = {
-  name: string;
-  email: string;
-  birthday: Date;
-  identify: "male" | "female" | "non-binary";
-  bio: string;
-};
-
-export type InterestData = {
-  interests: Array<string>;
-};
