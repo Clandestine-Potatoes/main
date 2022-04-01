@@ -11,7 +11,7 @@ import {
   GeoPoint,
 } from "firebase/firestore";
 import firebase from "./firebase";
-import type { IAbout, IAppUser, TInterests, IGeoLocation } from "./types";
+import type { IAbout, IAppUser, TInterests, IGeoCode } from "./types";
 
 const db = getFirestore(firebase);
 
@@ -93,9 +93,8 @@ export function getUser(uid: string) {
   // TODO: This should be of type AppUser
   return getDocById<IAppUser>(COLLECTIONS.USERS, uid);
 }
-export function updateLocation(uid: string, location: IGeoLocation) {
-  const loc = new GeoPoint(location.latitude, location.longitude);
-  return updateDoc<GeoPoint>(COLLECTIONS.USERS, loc, uid);
+export function updateLocation(uid: string, location: IGeoCode) {
+  return updateDoc<IGeoCode>(COLLECTIONS.USERS, location, uid);
 }
 
 // Types

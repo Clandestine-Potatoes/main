@@ -4,23 +4,16 @@ import type { User as AuthUser } from "firebase/auth";
 import { useEffect } from "react";
 import { useState } from "react";
 import AuthContext from "./AuthContext";
-import firebase from "../../api/firebase/firebase";
 import { auth } from "../../api/firebase/auth.firebase";
 import { getUser } from "../../api/firebase/firestore.firebase";
-import {
-  IAbout,
-  IAppUser,
-  IGeoPoint,
-  TInterests,
-} from "../../api/firebase/types";
-import App from "../../App";
+import { IAbout, IAppUser, TInterests } from "../../api/firebase/types";
 
 class AppUser implements IAppUser {
   uid: string;
   email: string;
   about: IAbout | undefined;
   interests: TInterests | undefined;
-  location: IGeoPoint | undefined;
+  location: string | undefined;
 
   constructor(authUser: AuthUser) {
     this.uid = authUser.uid;
