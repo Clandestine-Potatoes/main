@@ -15,7 +15,7 @@ export default function useSignUp() {
     // NOTE: Make sure this sets the user as logged in in FB
     setIsLoading(true);
     signUp(email, password)
-      .then(async (authUser) => {
+      .then((authUser) => {
         const { uid, email } = authUser;
         return createNewUserDoc(uid, email as string).then(() =>
           setUser(authUser)
