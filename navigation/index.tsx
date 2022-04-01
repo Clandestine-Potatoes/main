@@ -44,9 +44,9 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function UnauthenticatedNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name='Login' component={Login}/>
-      <Stack.Screen name='AccountCreation' component={AccountCreation}/>
-      <Stack.Screen name='AboutMeEdit' component={AboutMeEdit}/>
+      <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} />
+      <Stack.Screen name='AccountCreation' component={AccountCreation} options={{ headerShown: false }} />
+      <Stack.Screen name='AboutMeEdit' component={AboutMeEdit} options={{ headerShown: false }} />
     </Stack.Navigator>
   )
 }

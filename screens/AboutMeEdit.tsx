@@ -22,7 +22,7 @@ export default function AboutMeEdit() {
           <TextInput activeOutlineColor='#0089E3' label="Age" mode='outlined' style={styles.input} autoComplete keyboardType='number-pad' />
           <TextInput activeOutlineColor='#0089E3' label="I identify as" mode='outlined' style={styles.input} autoComplete />
           <TextInput activeOutlineColor='#0089E3' label="Bio" mode='outlined' style={styles.input} autoComplete multiline={true} numberOfLines={3}/>
-          <Button style={styles.nextButton} title="Next" onPress={() => {}}/>
+          <Button style={styles.nextButton} title="Submit" onPress={() => {}}/>
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAwareScrollView>
