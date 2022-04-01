@@ -18,6 +18,13 @@ export default function Dashboard({
       bio: "I like to hello world"
     },
     {
+      uid: "60b6a73f63ed0c1e369993c6",
+      icon: '🥵',
+      name: "Christian",
+      age: "33",
+      bio: "Absolutely not"
+    },
+    {
       uid: "60b6a73f63ed0c1e369993c4",
       icon: '🥸',
       name: "Jonni",
@@ -30,13 +37,6 @@ export default function Dashboard({
       name: "Justin",
       age: "???",
       bio: "Don't believe me? Ask the dishes"
-    },
-    {
-      uid: "60b6a73f63ed0c1e369993c6",
-      icon: '🥵',
-      name: "Christian",
-      age: "33",
-      bio: "Absolutely not"
     }
   ]
 
