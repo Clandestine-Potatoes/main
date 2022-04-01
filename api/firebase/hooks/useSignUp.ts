@@ -12,6 +12,7 @@ export default function useSignUp() {
 
   function trigger(email: string, password: string) {
     // Create user in firebase auth -> Add user to database -> Add user to AuthContext
+    // NOTE: Make sure this sets the user as logged in in FB
     setIsLoading(true);
     signUp(email, password)
       .then(async (user) => {
