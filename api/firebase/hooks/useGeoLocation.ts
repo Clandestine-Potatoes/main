@@ -4,7 +4,15 @@ import { updateLocation } from "../firestore.firebase";
 import axios from "axios";
 import config from "../../config";
 
-export default function useGeoLocation() {
+export default function useGeoLocation(): [
+  () => void,
+  {
+    location: string | null;
+    isSuccess: boolean;
+    isLoading: boolean;
+    error: any;
+  }
+] {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isSuccess, setIsSucess] = useState(false);

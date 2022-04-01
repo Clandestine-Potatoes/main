@@ -7,6 +7,7 @@ import AuthContext from "./AuthContext";
 import { auth } from "../../api/firebase/auth.firebase";
 import { getUser } from "../../api/firebase/firestore.firebase";
 import { IAbout, IAppUser, TInterests } from "../../api/firebase/types";
+import useGeoLocation from "../../api/firebase/hooks/useGeoLocation";
 
 class AppUser implements IAppUser {
   uid: string;
@@ -33,6 +34,8 @@ class AppUser implements IAppUser {
 const AuthProvider: FC = ({ children }) => {
   const [appUser, setAppUser] = useState<IAppUser | null>(null);
 
+  const [trigger, { location }] = useGeoLocation();
+
   useEffect(() => {
     // Check firebase for if the user is still logged in with a valid token and set locally
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
@@ -45,6 +48,18 @@ const AuthProvider: FC = ({ children }) => {
 
     return unsubscribe();
   }, []);
+
+  useEffect(() => {
+    // Location for appUser is updated in DB in useGeoLocation hook
+    if (!location) {
+      trigger();
+    }
+
+    if (location) {
+      // Update local appUser
+      updateUserLocation(location);
+    }
+  }, [appUser, location]);
 
   function setUser(authUser: AuthUser) {
     setAppUser(new AppUser(authUser));
