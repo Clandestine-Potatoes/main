@@ -69,13 +69,10 @@ export function updateUserAbout(user: User, data: Partial<AboutData>) {
   return updateDoc<Partial<AboutData>>("user", data, uid);
 }
 
-// export function setUserAbout(aboutData: AboutData): Promise<void> {
-//   return addDoc<AboutData>("users", aboutData);
-// }
-
-// export function setUserInterests(interestData: Array<string>) {
-//   return addDoc;
-// }
+export function updateUserInterests(user: User, data: InterestData) {
+  const { uid } = user;
+  return updateDoc<InterestData>("user", data, uid);
+}
 
 // Types
 export type AboutData = {
@@ -84,4 +81,8 @@ export type AboutData = {
   birthday: Date;
   identify: "male" | "female" | "non-binary";
   bio: string;
+};
+
+export type InterestData = {
+  interests: Array<string>;
 };
