@@ -17,6 +17,7 @@ export default function useSignIn() {
       .then((user) => {
         setUser(user);
         setData(user);
+        // TODO: Add auth user info to db
       })
       .catch((error) => setError(error))
       .finally(() => setIsLoading(false));
