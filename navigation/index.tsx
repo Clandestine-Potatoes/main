@@ -79,7 +79,7 @@ function AuthenticatedNavigator() {
         options={{ headerShown: false }}
       />
       <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} />
-      <Stack.Screen name="AboutMeEdit" component={AboutMeEdit} />
+      <Stack.Screen name="AboutMeEdit" component={AboutMeEdit} options={{ headerShown: false }}/>
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}

@@ -8,7 +8,7 @@ import { Button, Flex, Divider } from "@react-native-material/core";
 import { TextInput } from 'react-native-paper';
 
 import useAbout from "../api/firebase/hooks/useAbout";
-import { signOut } from '../api/firebase/auth.firebase';
+// import { signOut } from '../api/firebase/auth.firebase';
 
 export default function AboutMeEdit({ navigation: { navigate }}: { navigation: { navigate: any}}) {
   const [firstName, setFirstName] = useState<string>("");
@@ -17,10 +17,10 @@ export default function AboutMeEdit({ navigation: { navigate }}: { navigation: {
   const [identity, setIdentity] = useState<string>('');
   const [bio, setBio] = useState<string>('');
 
-  const handleLogout = () => {
-    signOut();
-    navigate('Login')
-  }
+  // const handleLogout = () => {
+  //   signOut();
+  //   navigate('Login')
+  // }
 
   const [trigger] = useAbout();
 
@@ -48,7 +48,7 @@ export default function AboutMeEdit({ navigation: { navigate }}: { navigation: {
           <TextInput activeOutlineColor='#0089E3' label="I identify as" mode='outlined' style={styles.input} autoComplete onChangeText={(value) => setIdentity(value)} />
           <TextInput activeOutlineColor='#0089E3' label="Bio" mode='outlined' style={styles.input} autoComplete multiline={true} numberOfLines={3} onChangeText={(value) => setBio(value)} />
           <Button style={styles.nextButton} title="Submit" onPress={handleSubmit}/>
-          <Button style={styles.logoutButton} title="Logout" onPress={handleLogout} />
+          {/* <Button style={styles.logoutButton} title="Logout" onPress={handleLogout} /> */}
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAwareScrollView>
