@@ -17,7 +17,7 @@ export default function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const [trigger, { isSuccess, isLoading, error }] = useSignIn();
+  const [trigger, { isLoading }] = useSignIn();
 
   function handleLogin() {
     trigger(email, password);
