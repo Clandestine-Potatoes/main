@@ -3,7 +3,7 @@ import { updateUserAbout } from "../firestore.firebase";
 import useAuth from "../../../contexts/auth-context/useAuth";
 import { IAbout } from "../types";
 
-export default function useSignUp() {
+export default function useSignUp(): any {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);

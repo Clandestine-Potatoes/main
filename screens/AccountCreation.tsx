@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Keyboard, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
@@ -8,15 +8,25 @@ import { Button, Divider } from "@react-native-material/core";
 import { TextInput } from 'react-native-paper';
 import { useForm, Controller } from "react-hook-form";
 
+import useSignUp from "../api/firebase/hooks/useSignUp";
+
 
 export default function AccountCreation({ navigation: { navigate }}: { navigation: { navigate: any}}) {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
   const { control, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       email: '',
       password: ''
     },
   });
-  const onSubmit = (data: any) => console.log(data);
+  const [trigger] = useSignUp();
+
+  function handleSignUp() {
+    trigger(email, password);
+    navigate('AboutMeEdit')
+  }
 
   return (
     <KeyboardAwareScrollView contentContainerStyle={styles.wrapper}>
@@ -25,18 +35,18 @@ export default function AccountCreation({ navigation: { navigate }}: { navigatio
           <Text style={styles.accountCreationHeader}>Create an account</Text>
           <Divider />
           <Controller control={control} rules={{required: true}} render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput activeOutlineColor='#0089E3' label="Email" mode='outlined' style={styles.input} autoComplete onChangeText={onChange}/>
+            <TextInput activeOutlineColor='#0089E3' label="Email" mode='outlined' style={styles.input} autoComplete onChangeText={(value) => { onChange; setEmail(() => value)}}/>
           )}
           name='email'
           />
           {errors.email && <Text style={styles.warning}>Email is required.</Text>}
           <Controller control={control} rules={{required: true}} render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput activeOutlineColor='#0089E3' label="Password" mode='outlined' style={styles.input} autoComplete onChangeText={onChange} secureTextEntry />
+            <TextInput activeOutlineColor='#0089E3' label="Password" mode='outlined' style={styles.input} autoComplete onChangeText={(value) => { onChange; setPassword(() => value)}} secureTextEntry />
           )}
           name='password'
           />
           {errors.password && <Text style={styles.warning}>Password is required.</Text>}
-          <Button style={styles.createAccountButton} title="Submit" onPress={() => navigate('AboutMeEdit')} />
+          <Button style={styles.createAccountButton} title="Submit" onPress={handleSignUp} />
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAwareScrollView>

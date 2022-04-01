@@ -11,7 +11,7 @@ export interface IAppUser {
 
 export interface IAbout {
   name: string | undefined;
-  birthday: number | undefined;
+  age: number | undefined;
   identity: string | undefined;
   bio: string | undefined;
 }
